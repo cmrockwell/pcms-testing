@@ -27,23 +27,12 @@ After(({I}) => {
   I.deleteWebsite(websiteTitle)
 })
 
-Scenario('insert icon', ({I}) => {
-  const iconsDropdown = {
-    animation: {
-      in: 0.3, //s
-      out: 0.225, //s
-    }
-  }
-  const insertIconButton = {css: '.btn-group.group-icons'}
-  const launcherIcon1xListItem = {xpath: `//div[@class='btn-group group-icons'] //ul[@class='items-list'] /li[@class='item'][contains(text(), 'launcher-icon-1x')]`}
+Scenario('insert icon', ({I, editPage}) => {
+  const iconName = 'launcher-icon-1x'
 
-  I.click(insertIconButton)
-  I.wait(iconsDropdown.animation.in)
-  I.see('launcher-icon-4x')
-  I.click(launcherIcon1xListItem)
-
+  editPage.richToolbar.insertIcon(iconName)
   within(editViewFrame, () => {
-    I.see('[icon:launcher-icon-1x]')
+    I.see(`[icon:${iconName}]`)
   })
 })
 

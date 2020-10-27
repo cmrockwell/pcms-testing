@@ -24,7 +24,7 @@ exports.config = {
   },
   include: {
     I: './src/actor.codecept.js',
-    askUserModal: './src/modals/AskUserModal.js'
+    editPage: './src/pages/EditPage.js'
   },
   bootstrap: null,
   mocha: {},
