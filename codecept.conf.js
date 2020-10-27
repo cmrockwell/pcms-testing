@@ -1,4 +1,7 @@
-const { setHeadlessWhen } = require('@codeceptjs/configure');
+const {
+  currentTime
+} = require('./src/util');
+const {setHeadlessWhen} = require('@codeceptjs/configure');
 
 // turn on headless mode when running with HEADLESS=true environment variable
 // export HEADLESS=true && npx codeceptjs run
@@ -6,7 +9,7 @@ setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
   tests: './src/tests/*.js',
-  output: './output',
+  output: `./output/${currentTime()}`,
   verbose: true,
   helpers: {
     Puppeteer: {
