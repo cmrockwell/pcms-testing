@@ -81,7 +81,7 @@ Scenario('insert image', ({I}) => {
   })
 
   /**
-   * Doesn't work
+   * TODO: Doesn't work
    * issue: https://github.com/headwirecom/peregrine-cms/issues/637
    */
   /*
