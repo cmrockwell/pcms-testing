@@ -60,6 +60,11 @@ module.exports = () => {
       }
 
       this.dontSee('create a page')
+      /**
+       * TODO: workaround for broken reactivity in right-panel editor
+       * https://github.com/headwirecom/peregrine-cms/issues/637
+       */
+      this.wait(3)
     }
 
     // Define custom steps here, use 'this' to access default methods of this.

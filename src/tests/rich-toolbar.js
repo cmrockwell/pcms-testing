@@ -11,13 +11,8 @@ Before(({I}) => {
   I.createNewWebsite(websiteTitle)
   I.click('Pages')
   I.createNewPage(websiteTitle, pageTitle, true)
+
   I.seeInTitle('Page Editor')
-  /**
-   * TODO: Why do we have to reload?
-   * issue: https://github.com/headwirecom/peregrine-cms/issues/637
-   */
-  I.refreshPage()
-  I.wait(1)
   I.dontSeeElement({css: '.spinner-wrapper'})
 
   within(editViewFrame, () => {
