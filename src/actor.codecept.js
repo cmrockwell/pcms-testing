@@ -11,7 +11,7 @@ module.exports = () => {
 
     createNewWebsite(title, andEdit=false) {
       this.amOnPage('http://localhost:8080/content/admin/pages/index.html')
-      this.click({css: 'div.create-tenant.action'})
+      this.click({css: '.create-tenant.action'})
       this.see('ThemecleanFlex Site', 'a')
       this.click('Next')
       this.click('default.css')
@@ -30,10 +30,9 @@ module.exports = () => {
 
     deleteWebsite(title) {
       const askUserModal = {
-        locator: {css: '#askUserModal'},
         animation: {
           in: 0.3, //s
-          out: 0.2
+          out: 0.2, //s
         }
       }
 
@@ -42,7 +41,7 @@ module.exports = () => {
       this.click({css: `a[title="delete '${title}'"]`})
       this.see('Delete Site')
       this.wait(askUserModal.animation.in)
-      this.click('Yes', askUserModal.locator)
+      this.click('Yes', {css: '#askUserModal'})
       this.wait(askUserModal.animation.out)
       this.dontSee(title)
     },
