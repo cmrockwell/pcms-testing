@@ -39,8 +39,8 @@ Scenario('insert an icon through both toolbars', ({I}) => {
   I.see('launcher-icon-4x')
   I.click({
     xpath: `//div[@class='btn-group group-icons']
-                //ul[@class='items-list']
-                  /li[@class='item'][contains(text(), 'launcher-icon-4x')]`
+              //ul[@class='items-list']
+                /li[@class='item'][contains(text(), 'launcher-icon-4x')]`
   })
 
   within({frame: '#editview'}, () => {
