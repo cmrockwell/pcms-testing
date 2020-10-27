@@ -22,6 +22,10 @@ Before(({I}) => {
   I.see('Teaser Vertical', {css: 'div.editor-panel'})
 })
 
+After(({I}) => {
+  I.deleteWebsite(websiteTitle)
+})
+
 Scenario('insert an icon through both toolbars', ({I}) => {
   const iconsDropdown = {
     animation: {
@@ -54,8 +58,4 @@ Scenario('insert an icon through both toolbars', ({I}) => {
                   /li[@class='item'][contains(text(), 'launcher-icon-2x')]`
   })
   I.see('[icon:launcher-icon-2x]')
-})
-
-After(({I}) => {
-  I.deleteWebsite(websiteTitle)
 })
