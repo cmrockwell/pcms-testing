@@ -22,7 +22,7 @@ Before(({I}) => {
   I.see('Teaser Vertical', {css: 'div.editor-panel'})
 })
 
-Scenario('insert an icon (launcher-icon-4x)', ({I}) => {
+Scenario('insert an icon through both toolbars', ({I}) => {
   const iconsDropdown = {
     animation: {
       in: 0.3, //s
@@ -33,10 +33,27 @@ Scenario('insert an icon (launcher-icon-4x)', ({I}) => {
   I.click({css: '.btn-group.group-icons'})
   I.wait(iconsDropdown.animation.in)
   I.see('launcher-icon-4x')
-
-  within({css: '.editor-panel .btn-group.group-icons'}, () => {
-    I.click(locate('.items-list').find('.item').withText('launcher-icon-4x'))
+  I.click({
+    xpath: `//div[@class='btn-group group-icons']
+                //ul[@class='items-list']
+                  /li[@class='item'][contains(text(), 'launcher-icon-4x')]`
   })
+
+  within({frame: '#editview'}, () => {
+    I.see('[icon:launcher-icon-4x]')
+  })
+
+  I.click({css: '.editor-panel .text-editor.inline-edit'})
+  I.click({css: '.editor-panel .text-editor.inline-edit'})
+  I.click({css: '.editor-panel .btn-group.group-icons'})
+  I.wait(iconsDropdown.animation.in)
+  I.click({
+    xpath: `//div[@class='editor-panel']
+              //div[@class='btn-group group-icons']
+                //ul[@class='items-list']
+                  /li[@class='item'][contains(text(), 'launcher-icon-2x')]`
+  })
+  I.see('[icon:launcher-icon-2x]')
 })
 
 After(({I}) => {
