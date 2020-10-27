@@ -12,6 +12,12 @@ Before(({I}) => {
   I.click('Pages')
   I.createNewPage(websiteTitle, pageTitle, true)
   I.seeInTitle('Page Editor')
+  /**
+   * TODO: Why do we have to reload?
+   * issue: https://github.com/headwirecom/peregrine-cms/issues/637
+   */
+  I.refreshPage()
+  I.wait(1)
   I.dontSeeElement({css: '.spinner-wrapper'})
 
   within(editViewFrame, () => {
@@ -26,7 +32,6 @@ After(({I}) => {
   I.deleteWebsite(websiteTitle)
 })
 
-/*
 Scenario('insert icon', ({I}) => {
   const iconsDropdown = {
     animation: {
@@ -46,7 +51,6 @@ Scenario('insert icon', ({I}) => {
     I.see('[icon:launcher-icon-1x]')
   })
 })
- */
 
 Scenario('insert image', ({I}) => {
   const insertImageButton = {css: '.btn-group.group-image'}
@@ -80,11 +84,6 @@ Scenario('insert image', ({I}) => {
     I.wait(modal.animation.in)
   })
 
-  /**
-   * TODO: Doesn't work
-   * issue: https://github.com/headwirecom/peregrine-cms/issues/637
-   */
-  /*
   I.see('Edit Image', modal.locator)
 
   within(modal.locator, () => {
@@ -95,11 +94,7 @@ Scenario('insert image', ({I}) => {
     I.wait(modal.animation.out)
   })
 
-  within(editViewFrame, () => {
-    I.seeElement(launcherIcon1xImg)
-    I.usePuppeteerTo('check dimensions', async ({page}) => {
-      const img = await page.$(launcherIcon1xImg.css)
-    })
+  within(editViewFrame, async () => {
+    I.seeAttributesOnElements(launcherIcon1xImg, {width: 500, height: 300})
   })
-  */
 })
