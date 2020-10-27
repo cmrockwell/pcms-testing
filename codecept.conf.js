@@ -13,9 +13,9 @@ exports.config = {
       url: 'http://localhost:8080',
       show: true,
       defaultViewport: null,
-      windowSize: '1900x1000',
+      windowSize: '1900x950',
       chrome: {
-        args: ['--no-sandbox', '--window-size=1900,1000'],
+        args: ['--no-sandbox', '--window-size=1900,950'],
       }
     }
   },
