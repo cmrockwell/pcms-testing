@@ -17,4 +17,4 @@ class AskUserModal {
 }
 
 module.exports = new AskUserModal()
-module.exports.RichToolbar = AskUserModal
+module.exports.AskUserModal = AskUserModal

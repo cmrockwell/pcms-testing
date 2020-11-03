@@ -1,12 +1,13 @@
+const {Website} = require('../const')
 const {I} = inject()
 
 class CreatePagePage {
 
   constructor() {
-    this.url = `/content/admin/pages/pages/create.html/path:/content/pcms_testing/pages`
+    this.url = `/content/admin/pages/pages/create.html/path:/content/${Website.title}/pages`
   }
 
-  createPage(title, andEdit=false) {
+  createPage(title, andEdit = false) {
     I.amOnPage(this.url)
     I.click('Next')
     I.fillField('Title', title)

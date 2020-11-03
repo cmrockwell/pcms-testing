@@ -1,42 +1,28 @@
-const websiteTitle = 'codeceptjs'
-const pageTitle = `${websiteTitle}-inline-editing`
-const editViewFrame = {frame: '#editview'}
-const inlineEditElement = {css: '.teaser-text.inline-edit[data-per-inline="model.text"]'}
+const {Website} = require('../const')
 
 Feature('rich-toolbar')
 
-Before(({I}) => {
-  I.login('admin', 'admin')
-  I.see('your websites', 'h2')
-  I.createNewWebsite(websiteTitle)
-  I.click('Pages')
-  I.createNewPage(websiteTitle, pageTitle, true)
-
-  I.seeInTitle('Page Editor')
-  I.dontSeeElement({css: '.spinner-wrapper'})
-
-  within(editViewFrame, () => {
-    I.click(inlineEditElement)
-    I.click(inlineEditElement)
-  })
-
-  I.see('Teaser Vertical', {css: '.editor-panel'})
+Before(({loginAs, createPagePage, editPagePage}) => {
+  loginAs('admin')
+  createPagePage.createPage('rich-toolbar', true)
+  editPagePage.loaded()
+  editPagePage.editViewFrame.selectInlineEdit()
+  editPagePage.componentExplorer.titleIs('Teaser Vertical')
 })
 
-After(({I}) => {
-  I.deleteWebsite(websiteTitle)
+After(({pagesPage}) => {
+  pagesPage.navigate()
+  pagesPage.deletePage('rich-toolbar')
 })
 
-Scenario('insert icon', ({I, editPage}) => {
+Scenario('insert icon', ({editPagePage}) => {
   const iconName = 'launcher-icon-1x'
 
-  editPage.richToolbar.insertIcon(iconName)
-  within(editViewFrame, () => {
-    I.see(`[icon:${iconName}]`)
-  })
+  editPagePage.richToolbar.insertIcon(iconName)
+  editPagePage.editViewFrame.containsText(`[icon:${iconName}]`)
 })
 
-Scenario('insert image', ({I}) => {
+Scenario('insert image', ({I, editPagePage}) => {
   const insertImageButton = {css: '.btn-group.group-image'}
   const modal = {
     locator: {css: '.modal-container'},
@@ -46,9 +32,10 @@ Scenario('insert image', ({I}) => {
     }
   }
   const launcherIcon1xBrowserEntry = {xpath: '//ul[@class="browse-list"]/li/span[contains(text(), "launcher-icon-1x.png")]'}
-  const launcherIcon1xPath = `/content/${websiteTitle}/assets/icons/launcher-icon-1x.png`
-  const launcherIcon1xImg = {css: `img[src="/content/${websiteTitle}/assets/icons/launcher-icon-1x.png"]`}
+  const launcherIcon1xPath = `/content/${Website.title}/assets/icons/launcher-icon-1x.png`
+  const launcherIcon1xImg = {css: `img[src="/content/${Website.title}/assets/icons/launcher-icon-1x.png"]`}
   const linkTabToggle = {xpath: '//*[@class="pathbrowser-tabs"]/*[@class="tab"]//*[@class="material-icons"][contains(text(), "link")]'}
+
 
   I.click(insertImageButton)
   I.wait(modal.animation.in)
@@ -61,7 +48,7 @@ Scenario('insert image', ({I}) => {
     I.wait(modal.animation.out)
   })
 
-  within(editViewFrame, () => {
+  within(editViewLocator, () => {
     I.seeElement(launcherIcon1xImg)
     I.waitForClickable(launcherIcon1xImg)
     I.doubleClick(launcherIcon1xImg)
@@ -78,7 +65,7 @@ Scenario('insert image', ({I}) => {
     I.wait(modal.animation.out)
   })
 
-  within(editViewFrame, async () => {
+  within(editViewLocator, async () => {
     I.seeAttributesOnElements(launcherIcon1xImg, {width: 500, height: 300})
   })
 })

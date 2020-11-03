@@ -1,4 +1,5 @@
 const {I} = inject()
+const editPage = require('./EditPagePage')
 
 class LoginPage {
 

@@ -1,3 +1,5 @@
-export const Website = {
-  title: 'pcms_testing'
+module.exports = {
+  Website: {
+    title: 'pcms_testing'
+  }
 }

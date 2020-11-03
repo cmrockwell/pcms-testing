@@ -1,4 +1,4 @@
-const {I} = inject();
+const {I} = inject()
 
 class RichToolbar {
 
@@ -12,14 +12,18 @@ class RichToolbar {
     this.locator = {
       iconsToggle() {
         return locate('.btn-group.group-icons')
-            .as('[icons drop-down toggle]')
+            .as('insert icon')
       },
       iconItem(name) {
         return locate(this.iconsToggle())
             .find('.items-list')
             .find('.item')
             .withText(name)
-            .as(`[drop-down item "${name}"]`)
+            .as(name)
+      },
+      imageToggle(name) {
+        return locate('.btn-group.group-image')
+            .as('insert image')
       }
     }
   }
@@ -33,5 +37,5 @@ class RichToolbar {
   }
 }
 
-module.exports = new RichToolbar();
-module.exports.RichToolbar = RichToolbar;
+module.exports = new RichToolbar()
+module.exports.RichToolbar = RichToolbar
