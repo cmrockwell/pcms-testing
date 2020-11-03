@@ -9,21 +9,26 @@ class RichToolbar {
         out: 0.225, //s
       }
     }
-    this.icons = {
-      locator: {css: '.btn-group.group-icons'},
-      icon: {
-        baseXpath: `//div[@class='btn-group group-icons'] //ul[@class='items-list'] /li[@class='item'][contains(text(), '%NAME%')]`
+    this.locator = {
+      iconsToggle() {
+        return locate('.btn-group.group-icons')
+            .as('[icons drop-down toggle]')
+      },
+      iconItem(name) {
+        return locate(this.iconsToggle())
+            .find('.items-list')
+            .find('.item')
+            .withText(name)
+            .as(`[drop-down item "${name}"]`)
       }
     }
   }
 
   insertIcon(name) {
-    const iconLocator = this.icons.icon.baseXpath.replace('%NAME%', name)
-
-    I.click(this.icons.locator)
+    I.click(this.locator.iconsToggle())
     I.wait(this.dropDown.animation.in)
-    I.see('launcher-icon-4x')
-    I.click(iconLocator)
+    I.see(name)
+    I.click(this.locator.iconItem(name))
     I.wait(this.dropDown.animation.out)
   }
 }
