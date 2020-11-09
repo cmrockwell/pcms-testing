@@ -29,9 +29,17 @@ exports.config = {
     createPagePage: './src/pages/CreatePagePage.js',
     pagesPage: './src/pages/PagesPage.js',
   },
-  bootstrap: () => {
-    const outputDir = path.join(__dirname, exports.config.output, '/*')
-    fs.rmdirSync(outputDir, { recursive: true })
+  bootstrap() {
+    const dir =  path.join(__dirname, exports.config.output)
+
+    fs.readdir(dir, (err, files) => {
+      if (err) throw err
+      files.forEach((file) => {
+        fs.unlink(path.join(dir, file), err => {
+          if (err) throw err
+        })
+      })
+    })
   },
   mocha: {},
   name: 'pcms-testing',

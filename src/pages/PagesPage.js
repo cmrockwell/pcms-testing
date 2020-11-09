@@ -24,6 +24,7 @@ class PagesPage {
   deletePage(title) {
     I.click(this.locator.deleteButton(title))
     this.askUserModal.confirm()
+    I.wait(1)
   }
 }
 

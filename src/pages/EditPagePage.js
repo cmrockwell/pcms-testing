@@ -9,12 +9,13 @@ class EditPagePage {
   componentExplorer
   richToolbar
   editViewFrame
-  locator
+  pathBrowser
 
   constructor() {
     this.componentExplorer = componentExplorer
     this.richToolbar = richToolbar
     this.editViewFrame = editViewFrame
+    this.pathBrowser = pathBrowser
     this.locator = {
       loadSpinner() {
         return locate({css: '.spinner-wrapper'})

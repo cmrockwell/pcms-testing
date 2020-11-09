@@ -25,7 +25,7 @@ class CreatePagePage {
      * https://github.com/headwirecom/peregrine-cms/issues/637
      */
     if (andEdit) {
-      I.wait(3)
+      I.wait(4)
     }
   }
 }

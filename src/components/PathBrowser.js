@@ -1,3 +1,5 @@
+const {Website} = require('../const')
+
 const {I} = inject()
 
 class PathBrowser {
@@ -10,17 +12,29 @@ class PathBrowser {
     this.locator = {
       container() {
         return locate('.pathbrowser')
+            .as('container')
       },
       browserEntry(name) {
-        return locate('.pathbrowser')
+        return locate(this.container())
             .find('.browse-list')
             .find('span').withText(name)
             .as(name)
       },
       selectedPath() {
-        return locate('.pathbrowser')
-            .find('pathbrowser-selected-path')
+        return locate(this.container())
+            .find('.pathbrowser-selected-path')
             .as('selected path')
+      },
+      header() {
+        return locate(this.container())
+            .find('.modal-header')
+            .as('header')
+      },
+      linkTab() {
+        return locate(this.container())
+            .find('.pathbrowser-tabs')
+            .find('.tab')
+            .find('.material-icons').withText('link')
       }
     }
   }
@@ -30,16 +44,20 @@ class PathBrowser {
     I.wait(this.animation.out)
   }
 
-  selectBrowseEntry(name) {
-    I.click(this.locator.browserEntry(name))
+  async selectBrowseEntry(name) {
+    const currentPath = await I.grabTextFrom(this.locator.selectedPath())
+    await I.click(this.locator.browserEntry(name))
+    await I.see(`${currentPath}/${name}`, this.locator.selectedPath())
   }
 
-  selectedPathIs(path) {
-    I.see(path, this.locator.selectedPath())
+  headerIs(header) {
+    I.see(header, this.locator.title())
   }
 
-  switchToLinkTab() {
-
+  setImageDimensions(width, height) {
+    I.click(this.locator.linkTab())
+    I.fillField('Image Width (px)', width)
+    I.fillField('Image Height (px)', height)
   }
 }
 
