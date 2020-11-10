@@ -1,5 +1,5 @@
 # End-to-End Testing for peregrine-cms
-This project uses [CodeceptJS](https://codecept.io/) to provide end-to-end testing for [peregrine-cms](https://github.com/headwirecom/peregrine-cms).
+This project uses [CodeceptJS](https://codecept.io/) with [Puppeteer](https://codecept.io/puppeteer/) to provide end-to-end testing with for [peregrine-cms](https://github.com/headwirecom/peregrine-cms).
 
 ## Requirements
 - ready-to-run peregrine-cms system (on `develop` or `develop-sling12` branch)
