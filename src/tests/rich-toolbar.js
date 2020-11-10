@@ -22,10 +22,10 @@ Scenario('insert icon', ({editPagePage}) => {
   editPagePage.editViewFrame.containsText(`[icon:${iconName}]`)
 })
 
-Scenario('insert image', ({I, editPagePage}) => {
+Scenario('insert image', async ({editPagePage}) => {
   editPagePage.richToolbar.openImageBrowser()
-  editPagePage.pathBrowser.selectBrowseEntry('icons')
-  editPagePage.pathBrowser.selectBrowseEntry('launcher-icon-1x.png')
+  await editPagePage.pathBrowser.selectBrowseEntry('icons')
+  await editPagePage.pathBrowser.selectBrowseEntry('launcher-icon-1x.png')
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.openEditImageModal(
       `/content/${Website.title}/assets/icons/launcher-icon-1x.png`)
