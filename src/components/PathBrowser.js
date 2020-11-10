@@ -51,7 +51,7 @@ class PathBrowser {
   }
 
   headerIs(header) {
-    I.see(header, this.locator.title())
+    I.see(header, this.locator.header())
   }
 
   setImageDimensions(width, height) {
