@@ -4,12 +4,12 @@
   "description": "testing for peregrine-cms",
   "main": "main.js",
   "dependencies": {
-    "puppeteer": "^5.4.0",
-    "codeceptjs": "^3.0.1",
     "@codeceptjs/configure": "^0.6.0",
     "@codeceptjs/examples": "^1.2.1",
     "@codeceptjs/ui": "^0.4.2",
-    "playwright": "^1.5.1"
+    "codeceptjs": "^3.0.1",
+    "playwright": "^1.5.1",
+    "puppeteer": "^5.4.0"
   },
   "scripts": {
     "test": "codeceptjs run --steps",
@@ -29,5 +29,9 @@
   "bugs": {
     "url": "https://github.com/Felix-Puetz/pcms-testing/issues"
   },
-  "homepage": "https://github.com/Felix-Puetz/pcms-testing#readme"
+  "homepage": "https://github.com/Felix-Puetz/pcms-testing#readme",
+  "devDependencies": {
+    "@codeceptjs/helper": "^1.0.1",
+    "form-data": "^3.0.0"
+  }
 }
