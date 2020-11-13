@@ -12,7 +12,7 @@ exports.config = {
   verbose: true,
   helpers: {
     Puppeteer: {
-      keepCookies: true,
+      //keepCookies: true,
       url: process.env.CODECEPT_URL || 'http://localhost:8080',
       show: true,
       defaultViewport: null,
@@ -20,17 +20,23 @@ exports.config = {
       chrome: {
         args: ['--no-sandbox', '--window-size=1900,950'],
       }
+    },
+    REST: {
+      endpoint: 'http://localhost:8080/perapi',
+      onRequest(request) {
+      }
     }
   },
   include: {
-    I: './src/actor.codecept.js',
-    loginPage: './src/pages/LoginPage.js',
-    editPagePage: './src/pages/EditPagePage.js',
-    createPagePage: './src/pages/CreatePagePage.js',
-    pagesPage: './src/pages/PagesPage.js',
+    I: './src/actor.codecept',
+    perApi: './src/PerApi',
+    loginPage: './src/pages/LoginPage',
+    editPagePage: './src/pages/EditPagePage',
+    createPagePage: './src/pages/CreatePagePage',
+    pagesPage: './src/pages/PagesPage',
   },
   bootstrap() {
-    const dir =  path.join(__dirname, exports.config.output)
+    const dir = path.join(__dirname, exports.config.output)
 
     fs.readdir(dir, (err, files) => {
       if (err) throw err
@@ -62,7 +68,7 @@ exports.config = {
       inject: 'loginAs',
       users: {
         admin: {
-          login: (I) => {
+          login: async (I) => {
             I.loginAs('admin')
           },
           check: (I) => {

@@ -2,17 +2,24 @@ const {Tenant} = require('../const')
 
 Feature('rich-toolbar')
 
-Before(({loginAs, createPagePage, editPagePage}) => {
+Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
   loginAs('admin')
-  createPagePage.createPage('rich-toolbar', true)
+  await perApi.createPage('rich-toolbar')
+  await perApi.addComponentToPage(
+      'rich-toolbar',
+      `/apps/pcms_testing/components/richtext`,
+      'into-into',
+      'sample'
+  )
+  pagesPage.editPage('rich-toolbar')
   editPagePage.loaded()
-  editPagePage.editViewFrame.selectInlineEdit()
-  editPagePage.componentExplorer.titleIs('Teaser Vertical')
+  editPagePage.editViewFrame.selectFirstInlineEdit()
+  editPagePage.componentExplorer.titleIs('Rich Text')
 })
 
-After(({pagesPage}) => {
+After(({pagesPage, perApi}) => {
+  perApi.deletePage('rich-toolbar')
   pagesPage.navigate()
-  pagesPage.deletePage('rich-toolbar')
 })
 
 Scenario('insert icon', ({editPagePage}) => {

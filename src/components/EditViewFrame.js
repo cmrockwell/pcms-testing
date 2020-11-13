@@ -15,7 +15,7 @@ class EditViewFrame {
         return {frame: '#editview'}
       },
       inlineEdit() {
-        return locate('.teaser-text.inline-edit')
+        return locate('.inline-edit')
             .withAttr({'data-per-inline': 'model.text'})
             .as('inline-edit')
       },
@@ -27,7 +27,7 @@ class EditViewFrame {
     }
   }
 
-  selectInlineEdit() {
+  selectFirstInlineEdit() {
     I.switchTo(this.locator.frame())
     I.click(this.locator.inlineEdit())
     I.click(this.locator.inlineEdit())
