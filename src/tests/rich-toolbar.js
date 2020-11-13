@@ -1,4 +1,4 @@
-const {Website} = require('../const')
+const {Tenant} = require('../const')
 
 Feature('rich-toolbar')
 
@@ -28,11 +28,11 @@ Scenario('insert image', async ({editPagePage}) => {
   await editPagePage.pathBrowser.selectBrowseEntry('launcher-icon-1x.png')
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.openEditImageModal(
-      `/content/${Website.title}/assets/icons/launcher-icon-1x.png`)
+      `/content/${Tenant}/assets/icons/launcher-icon-1x.png`)
   editPagePage.pathBrowser.headerIs('Edit Image')
   editPagePage.pathBrowser.setImageDimensions(500, 300)
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.seeAttributesOnImage(
-      `/content/${Website.title}/assets/icons/launcher-icon-1x.png`,
+      `/content/${Tenant}/assets/icons/launcher-icon-1x.png`,
       {width: 500, height: 300})
 })

@@ -1,5 +1,3 @@
 module.exports = {
-  Website: {
-    title: 'pcms_testing'
-  }
+  Tenant: 'pcms_testing'
 }

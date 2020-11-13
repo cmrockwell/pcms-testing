@@ -1,10 +1,10 @@
-const {Website} = require('../const')
+const {Tenant} = require('../const')
 const {I} = inject()
 
 class CreatePagePage {
 
   constructor() {
-    this.url = `/content/admin/pages/pages/create.html/path:/content/${Website.title}/pages`
+    this.url = `/content/admin/pages/pages/create.html/path:/content/${Tenant}/pages`
   }
 
   createPage(title, andEdit = false) {

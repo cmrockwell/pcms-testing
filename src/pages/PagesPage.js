@@ -1,4 +1,4 @@
-const {Website} = require('../const')
+const {Tenant} = require('../const')
 const askUserModal = require('../components/AskUserModal')
 const {I} = inject()
 
@@ -6,7 +6,7 @@ class PagesPage {
 
   constructor() {
     this.askUserModal = askUserModal
-    this.url = `/content/admin/pages/pages.html/path:/content/${Website.title}/pages`
+    this.url = `/content/admin/pages/pages.html/path:/content/${Tenant}/pages`
     this.locator = {
       deleteButton(title) {
         return locate('a')
