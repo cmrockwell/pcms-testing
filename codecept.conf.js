@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const users = require('./resources/users.json')
 const {setHeadlessWhen} = require('@codeceptjs/configure')
 
 // turn on headless mode when running with HEADLESS=true environment variable
@@ -21,15 +22,18 @@ exports.config = {
         args: ['--no-sandbox', '--window-size=1900,950'],
       }
     },
-    REST: {
+    ExtendedRest: {
+      require: './src/helpers/ExtendedRest.js',
       endpoint: 'http://localhost:8080/perapi',
-      onRequest(request) {
+      withCredentials: true,
+      defaultHeaders: {
+        auth: users.admin
       }
     }
   },
   include: {
     I: './src/actor.codecept',
-    perApi: './src/PerApi',
+    perApi: './src/modules/PerApi',
     loginPage: './src/pages/LoginPage',
     editPagePage: './src/pages/EditPagePage',
     createPagePage: './src/pages/CreatePagePage',
@@ -69,10 +73,10 @@ exports.config = {
       users: {
         admin: {
           login: async (I) => {
-            I.loginAs('admin')
+            await I.loginAs('admin')
           },
-          check: (I) => {
-            I.amLoggedIn()
+          check: async (I) => {
+            await I.amLoggedIn()
           }
         }
       }

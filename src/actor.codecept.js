@@ -3,12 +3,12 @@ const pagesPage = require('./pages/PagesPage')
 
 module.exports = () => {
   return actor({
-    loginAs(user) {
-      loginPage.loginAs(user)
+    async loginAs(user) {
+      await loginPage.loginAs(user)
       pagesPage.navigate()
     },
 
-    amLoggedIn() {
+    async amLoggedIn() {
       pagesPage.navigate()
     }
   })

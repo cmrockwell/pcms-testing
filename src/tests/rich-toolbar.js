@@ -3,7 +3,6 @@ const {Tenant} = require('../const')
 Feature('rich-toolbar')
 
 Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
-  loginAs('admin')
   await perApi.createPage('rich-toolbar')
   await perApi.addComponentToPage(
       'rich-toolbar',
@@ -11,6 +10,7 @@ Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
       'into-into',
       'sample'
   )
+  await loginAs('admin')
   pagesPage.editPage('rich-toolbar')
   editPagePage.loaded()
   editPagePage.editViewFrame.selectFirstInlineEdit()

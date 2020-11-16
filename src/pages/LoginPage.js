@@ -1,22 +1,17 @@
+const users = require('../../resources/users.json')
 const {I} = inject()
 
 class LoginPage {
 
   constructor() {
     this.url = '/system/sling/form/login'
-    this.user = {
-      admin: {
-        username: 'admin',
-        password: 'admin'
-      }
-    }
   }
 
-  loginAs(user) {
+  async loginAs(user) {
     const {
       username,
       password
-    } = this.user[user]
+    } = users[user]
 
     I.amOnPage(this.url)
     I.fillField('Username', username)
