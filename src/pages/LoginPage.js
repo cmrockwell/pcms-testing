@@ -1,5 +1,4 @@
 const {I} = inject()
-const editPage = require('./EditPagePage')
 
 class LoginPage {
 
@@ -21,7 +20,7 @@ class LoginPage {
 
     I.amOnPage(this.url)
     I.fillField('Username', username)
-    I.fillField('Password', password)
+    I.fillField('Password', secret(password))
     I.click('Log In')
     I.waitForElement('.tenant-tabs', 2 * 60)
     I.see('your websites', 'h2')
