@@ -35,6 +35,7 @@ class PathBrowser {
             .find('.pathbrowser-tabs')
             .find('.tab')
             .find('.material-icons').withText('link')
+            .as('link-tab')
       }
     }
   }
