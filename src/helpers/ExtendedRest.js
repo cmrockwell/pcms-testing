@@ -24,8 +24,7 @@ class ExtendedRest extends REST {
       baseURL: this._url(req.url),
       method: req.method,
       data: req.data,
-      headers: {...req.headers, ...this.defaultHeaders},
-      auth: req.auth
+      headers: {...req.headers, ...this.defaultHeaders}
     })
   }
 }
@@ -40,16 +39,14 @@ class Request {
   method
   data
   headers
-  auth
   output
 
   constructor(url = '', method = 'GET', data = null,
-      headers = {}, auth = null, output = null) {
+      headers = {}, output = null) {
     this.url = url
     this.method = method
     this.data = data
     this.headers = headers
-    this.auth = auth
     this.output = output
   }
 
@@ -58,7 +55,6 @@ class Request {
       url: this.url,
       method: this.method,
       headers: this.headers,
-      auth: this.auth
     }
   }
 
@@ -124,11 +120,6 @@ class BuildableRequest extends Request {
 
   withHeader(name, value) {
     this.headers[name] = value
-    return this
-  }
-
-  withAuth(auth) {
-    this.auth = auth
     return this
   }
 
