@@ -3,6 +3,7 @@ const {Tenant} = require('../const')
 Feature('rich-toolbar')
 
 Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
+  await perApi.createTenant()
   await perApi.createPage('rich-toolbar')
   await perApi.addComponentToPage(
       'rich-toolbar',
