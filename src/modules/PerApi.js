@@ -1,5 +1,5 @@
 const FormData = require('form-data')
-const {Tenant} = require('./const')
+const {Tenant} = require('../const')
 const {I} = inject()
 
 class PerApi {
