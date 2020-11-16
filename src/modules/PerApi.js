@@ -9,6 +9,36 @@ class PerApi {
     this.headers = {}
   }
 
+  async createTenant() {
+    const form = new FormData()
+    form.append('fromTenant', 'themecleanflex')
+    form.append('toTenant', Tenant)
+    form.append('tenantTitle', Tenant)
+    form.append('colorPalette',
+        '/content/themecleanflex/pages/css/palettes/default.css')
+    return I.sendRestRequest(
+        Request.build()
+            .withUrl('/admin/createTenant.json')
+            .withPOST()
+            .withHeaders(form.getHeaders())
+            .withData(form)
+            .as(`create tenant "${Tenant}"`)
+    )
+  }
+
+  async deleteTenant() {
+    const form = new FormData()
+    form.append('name', 'pcms_testing')
+    return I.sendRestRequest(
+        Request.build()
+            .withUrl(`admin/deleteTenant.json`)
+            .withPOST()
+            .withHeaders(form.getHeaders())
+            .withData(form)
+            .as(`delete tenant "${Tenant}"`)
+    )
+  }
+
   async createPage(name) {
     const form = new FormData()
     form.append('name', name)
