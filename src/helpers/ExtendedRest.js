@@ -9,10 +9,6 @@ class ExtendedRest extends REST {
     this.defaultHeaders = {}
   }
 
-  addRestDefaultHeader(name, value) {
-    this.headers[name] = value
-  }
-
   /**
    * custom request send function based on the request object.
    * mainly used to minify the step-output
