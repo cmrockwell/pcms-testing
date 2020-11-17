@@ -1,5 +1,6 @@
 const {Tenant} = require('../const')
 const askUserModal = require('../components/AskUserModal')
+const editPagePage = require('./EditPagePage')
 const {I} = inject()
 
 class PagesPage {
@@ -35,6 +36,7 @@ class PagesPage {
   editPage(title) {
     this.navigate()
     I.click(this.locator.editButton(title))
+    editPagePage.loaded()
   }
 }
 
