@@ -1,4 +1,5 @@
 const REST = require('codeceptjs/lib/helper/REST')
+const FormData = require('form-data')
 
 class ExtendedRest extends REST {
 
@@ -101,6 +102,16 @@ class BuildableRequest extends Request {
 
   withMethod(method) {
     this.method = method
+    return this
+  }
+
+  withFormData(data) {
+    const form = new FormData()
+    Object.keys(data).forEach((key) => {
+      form.append(key, data[key])
+    })
+    this.headers = form.getHeaders()
+    this.data = form
     return this
   }
 
