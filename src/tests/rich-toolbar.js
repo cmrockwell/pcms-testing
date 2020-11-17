@@ -14,7 +14,7 @@ Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
   await loginAs('admin')
   pagesPage.editPage('rich-toolbar')
   editPagePage.editViewFrame.selectFirstInlineEdit()
-  editPagePage.componentExplorer.titleIs('Rich Text')
+  editPagePage.editorPanel.titleIs('Rich Text')
 })
 
 After(({perApi}) => {

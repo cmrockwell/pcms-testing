@@ -1,4 +1,4 @@
-const componentExplorer = require('../components/EditorPanel')
+const editorPanel = require('../components/EditorPanel')
 const richToolbar = require('../components/Richtoolbar')
 const editViewFrame = require('../components/EditViewFrame')
 const pathBrowser = require('../components/PathBrowser')
@@ -6,13 +6,13 @@ const {I} = inject()
 
 class EditPagePage {
 
-  componentExplorer
+  editorPanel
   richToolbar
   editViewFrame
   pathBrowser
 
   constructor() {
-    this.componentExplorer = componentExplorer
+    this.editorPanel = editorPanel
     this.richToolbar = richToolbar
     this.editViewFrame = editViewFrame
     this.pathBrowser = pathBrowser
