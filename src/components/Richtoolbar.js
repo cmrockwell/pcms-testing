@@ -44,14 +44,10 @@ class RichToolbar {
 
   async togglePreview() {
     const cls = await I.grabAttributeFrom(this.locator.previewBtn(), 'class')
-    const isActive = cls.indexOf('active') < 0
+    const isActive = cls.split(' ').includes('active')
     I.click(this.locator.previewBtn())
     I.moveCursorTo(this.locator.container(), 500, 500)
     I.wait(BTN_TRANSITION)
-    console.log(
-        '########-> ',
-        await I.grabCssPropertyFrom(this.locator.previewBtn(), 'background-color')
-    )
     I.seeCssPropertiesOnElements(this.locator.previewBtn(), {
       'background-color': !isActive ? ACTIVE_BTN_BG_COLOR : INACTIVE_BTN_BG_COLOR
     })
