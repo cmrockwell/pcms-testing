@@ -29,16 +29,19 @@ Scenario('insert icon', ({editPagePage}) => {
 })
 
 Scenario('insert image', async ({editPagePage}) => {
+  const imgName = 'launcher-icon-1x'
+
   editPagePage.richToolbar.openImageBrowser()
   await editPagePage.pathBrowser.selectBrowseEntry('icons')
-  await editPagePage.pathBrowser.selectBrowseEntry('launcher-icon-1x.png')
+  await editPagePage.pathBrowser.selectBrowseEntry(imgName)
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.openEditImageModal(
-      `/content/${Tenant}/assets/icons/launcher-icon-1x.png`)
+      `/content/${Tenant}/assets/icons/${imgName}`)
   editPagePage.pathBrowser.headerIs('Edit Image')
   editPagePage.pathBrowser.setImageDimensions(500, 300)
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.seeAttributesOnImage(
-      `/content/${Tenant}/assets/icons/launcher-icon-1x.png`,
-      {width: 500, height: 300})
+      `/content/${Tenant}/assets/icons/${imgName}`,
+      {width: 500, height: 300}
+  )
 })
