@@ -18,9 +18,8 @@ Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
   editPagePage.componentExplorer.titleIs('Rich Text')
 })
 
-After(({pagesPage, perApi}) => {
-  perApi.deletePage('rich-toolbar')
-  pagesPage.navigate()
+After(({perApi}) => {
+  perApi.deleteTenant()
 })
 
 Scenario('insert icon', ({editPagePage}) => {

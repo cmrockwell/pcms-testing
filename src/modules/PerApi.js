@@ -31,7 +31,7 @@ class PerApi {
     form.append('name', 'pcms_testing')
     return I.sendRestRequest(
         Request.build()
-            .withUrl(`admin/deleteTenant.json`)
+            .withUrl(`/admin/deleteTenant.json`)
             .withPOST()
             .withHeaders(form.getHeaders())
             .withData(form)
