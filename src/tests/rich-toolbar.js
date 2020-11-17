@@ -29,7 +29,7 @@ Scenario('insert icon', ({editPagePage}) => {
 })
 
 Scenario('insert image', async ({editPagePage}) => {
-  const imgName = 'launcher-icon-1x'
+  const imgName = 'launcher-icon-1x.png'
 
   editPagePage.richToolbar.openImageBrowser()
   await editPagePage.pathBrowser.selectBrowseEntry('icons')
@@ -44,4 +44,11 @@ Scenario('insert image', async ({editPagePage}) => {
       `/content/${Tenant}/assets/icons/${imgName}`,
       {width: 500, height: 300}
   )
+})
+
+Scenario('open preview', async ({editPagePage}) => {
+  await editPagePage.richToolbar.togglePreview()
+  editPagePage.editViewFrame.isPreview()
+  await editPagePage.richToolbar.togglePreview()
+  editPagePage.editViewFrame.isEditMode()
 })

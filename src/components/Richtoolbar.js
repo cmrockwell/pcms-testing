@@ -1,5 +1,9 @@
 const {I} = inject()
 
+const ACTIVE_BTN_BG_COLOR = 'rgb(255, 152, 0)'
+const INACTIVE_BTN_BG_COLOR = 'rgb(55, 71, 79)'
+const BTN_TRANSITION = .2 //s
+
 class RichToolbar {
 
   constructor() {
@@ -16,9 +20,18 @@ class RichToolbar {
       }
     }
     this.locator = {
+      container() {
+        return locate('.richtoolbar.on-sub-nav').as('rich-toolbar')
+      },
       toggle(group) {
         return locate(`.btn-group.group-${group}`)
             .as(`toggle ${group}`)
+      },
+      previewBtn(inNewTab = false) {
+        return locate(this.toggle('always-active'))
+            .find('button.btn.always-active')
+            .at(!inNewTab? 1 : 2)
+            .as('preview-btn')
       },
       iconItem(name) {
         return locate(this.toggle('icons'))
@@ -27,6 +40,21 @@ class RichToolbar {
             .as(name)
       }
     }
+  }
+
+  async togglePreview() {
+    const cls = await I.grabAttributeFrom(this.locator.previewBtn(), 'class')
+    const isActive = cls.indexOf('active') < 0
+    I.click(this.locator.previewBtn())
+    I.moveCursorTo(this.locator.container(), 500, 500)
+    I.wait(BTN_TRANSITION)
+    console.log(
+        '########-> ',
+        await I.grabCssPropertyFrom(this.locator.previewBtn(), 'background-color')
+    )
+    I.seeCssPropertiesOnElements(this.locator.previewBtn(), {
+      'background-color': !isActive ? ACTIVE_BTN_BG_COLOR : INACTIVE_BTN_BG_COLOR
+    })
   }
 
   insertIcon(name) {

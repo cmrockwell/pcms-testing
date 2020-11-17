@@ -1,4 +1,3 @@
-const {Website} = require('../const')
 const {I} = inject()
 
 class EditViewFrame {
@@ -14,6 +13,9 @@ class EditViewFrame {
       frame() {
         return {frame: '#editview'}
       },
+      frameElement() {
+        return locate('#editview').as('edit-view-frame')
+      },
       inlineEdit() {
         return locate('.inline-edit')
             .withAttr({'data-per-inline': 'model.text'})
@@ -25,6 +27,18 @@ class EditViewFrame {
             .as(src)
       }
     }
+  }
+
+  isPreview() {
+    I.seeAttributesOnElements(this.locator.frameElement(), {
+      'data-per-mode': 'preview'
+    })
+  }
+
+  isEditMode() {
+    I.seeAttributesOnElements(this.locator.frameElement(), {
+      'data-per-mode': ''
+    })
   }
 
   selectFirstInlineEdit() {
