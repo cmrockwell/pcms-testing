@@ -39,6 +39,7 @@ class RichToolbar {
 
   openImageBrowser() {
     I.click(this.locator.toggle('image'))
+    I.wait(this.modal.animation.in)
   }
 }
 
