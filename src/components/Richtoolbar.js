@@ -1,3 +1,4 @@
+const {Tenant} = require('../const')
 const {I} = inject()
 
 const ACTIVE_BTN_BG_COLOR = 'rgb(255, 152, 0)'
@@ -51,6 +52,12 @@ class RichToolbar {
     I.seeCssPropertiesOnElements(this.locator.previewBtn(), {
       'background-color': !isActive ? ACTIVE_BTN_BG_COLOR : INACTIVE_BTN_BG_COLOR
     })
+  }
+
+  async openPreviewInNewTab(pageName) {
+    I.click(this.locator.previewBtn(true))
+    I.switchToNextTab()
+    I.seeInCurrentUrl(`/content/${Tenant}/pages/${pageName}.html`)
   }
 
   insertIcon(name) {

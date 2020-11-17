@@ -1,4 +1,5 @@
 const {Tenant} = require('../const')
+const expect = require('expect')
 
 Feature('rich-toolbar')
 
@@ -51,4 +52,8 @@ Scenario('open preview', async ({editPagePage}) => {
   editPagePage.editViewFrame.isPreview()
   await editPagePage.richToolbar.togglePreview()
   editPagePage.editViewFrame.isEditMode()
+})
+
+Scenario('open preview in new tab', async ({I, editPagePage}) => {
+  await editPagePage.richToolbar.openPreviewInNewTab('rich-toolbar')
 })
