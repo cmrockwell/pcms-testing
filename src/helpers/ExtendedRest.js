@@ -63,7 +63,7 @@ class Request {
   }
 
   toString() {
-    return (`"${this.output}"` || `${this.asJson()}`) + ` [${this.method}] `
+    return (`${this.output}` || `${this.asJson()}`) + ` [${this.method}] `
   }
 }
 
