@@ -54,15 +54,6 @@ class PerApi {
     )
   }
 
-  async deletePage(name) {
-    return I.sendRestRequest(
-        Request.build()
-            .withUrl(`/admin/deletePage.json/content/${Tenant}/pages/${name}`)
-            .withPOST()
-            .as(`delete page "${name}"`)
-    )
-  }
-
   async addComponentToPage(page, component, drop, variation) {
     const cmpShortName = component.split('/').reverse()[0]
     const form = new FormData()
