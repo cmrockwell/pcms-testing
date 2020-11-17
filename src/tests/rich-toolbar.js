@@ -1,5 +1,4 @@
 const {Tenant} = require('../const')
-const expect = require('expect')
 
 Feature('rich-toolbar')
 
