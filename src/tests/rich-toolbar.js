@@ -1,24 +1,30 @@
-const {Tenant} = require('../const')
+const {Component} = require('../const')
 
-Feature('rich-toolbar')
+const FEATURE_NAME = 'rich-toolbar'
+const TENANT = 'pcms_testing'
+const PAGE = FEATURE_NAME
+
+Feature(FEATURE_NAME)
 
 Before(async ({loginAs, perApi, pagesPage, editPagePage}) => {
-  await perApi.createTenant()
-  await perApi.createPage('rich-toolbar')
-  await perApi.addComponentToPage(
-      'rich-toolbar',
-      `/apps/pcms_testing/components/richtext`,
+  await perApi.createTenant(TENANT)
+  await perApi.createPage(TENANT, PAGE)
+  await perApi.addComponent(
+      TENANT,
+      PAGE,
+      Component.richText(TENANT),
       'into-into',
       'sample'
   )
   await loginAs('admin')
-  pagesPage.editPage('rich-toolbar')
+  pagesPage.navigate(TENANT)
+  pagesPage.editPage(PAGE)
   editPagePage.editViewFrame.selectFirstInlineEdit()
   editPagePage.editorPanel.titleIs('Rich Text')
 })
 
 After(({perApi}) => {
-  perApi.deleteTenant()
+  perApi.deleteTenant(TENANT)
 })
 
 Scenario('insert icon', ({editPagePage}) => {
@@ -36,12 +42,12 @@ Scenario('insert image', async ({editPagePage}) => {
   await editPagePage.pathBrowser.selectBrowseEntry(imgName)
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.openEditImageModal(
-      `/content/${Tenant}/assets/icons/${imgName}`)
+      `/content/${TENANT}/assets/icons/${imgName}`)
   editPagePage.pathBrowser.headerIs('Edit Image')
   editPagePage.pathBrowser.setImageDimensions(500, 300)
   editPagePage.pathBrowser.select()
   editPagePage.editViewFrame.seeAttributesOnImage(
-      `/content/${Tenant}/assets/icons/${imgName}`,
+      `/content/${TENANT}/assets/icons/${imgName}`,
       {width: 500, height: 300}
   )
 })
@@ -54,5 +60,5 @@ Scenario('open preview', async ({editPagePage}) => {
 })
 
 Scenario('open preview in new tab', async ({I, editPagePage}) => {
-  await editPagePage.richToolbar.openPreviewInNewTab('rich-toolbar')
+  await editPagePage.richToolbar.openPreviewInNewTab(TENANT, PAGE)
 })

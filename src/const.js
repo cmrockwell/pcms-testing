@@ -1,5 +1,7 @@
 module.exports = {
-  Tenant: 'pcms_testing',
+  Component: {
+    richText: (tenant) => `/apps/${tenant}/components/richtext`,
+  },
   ColorPalette: {
     default: '/content/themecleanflex/pages/css/palettes/default.css'
   }

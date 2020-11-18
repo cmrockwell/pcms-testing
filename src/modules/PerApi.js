@@ -1,58 +1,54 @@
 const {Request} = require('../helpers/ExtendedRest')
-const {Tenant, ColorPalette} = require('../const')
+const {ColorPalette} = require('../const')
 const {I} = inject()
 
 class PerApi {
 
-  constructor() {
-    this.headers = {}
-  }
-
-  async createTenant() {
+  async createTenant(tenant, title = tenant, palette = ColorPalette.default) {
     return I.sendRestRequest(
         Request.build()
             .withUrl('/admin/createTenant.json')
             .withPOST()
             .withFormData({
               fromTenant: 'themecleanflex',
-              toTenant: Tenant,
-              tenantTitle: Tenant,
-              colorPalette: ColorPalette.default
+              toTenant: tenant,
+              tenantTitle: title,
+              colorPalette: palette
             })
-            .as(`create tenant "${Tenant}"`)
+            .as(`create tenant "${tenant}"`)
     )
   }
 
-  async deleteTenant() {
+  async deleteTenant(tenant) {
     return I.sendRestRequest(
         Request.build()
             .withUrl(`/admin/deleteTenant.json`)
             .withPOST()
-            .withFormData({name: Tenant})
-            .as(`delete tenant "${Tenant}"`)
+            .withFormData({name: tenant})
+            .as(`delete tenant "${tenant}"`)
     )
   }
 
-  async createPage(name) {
+  async createPage(tenant, name, title = name) {
     return I.sendRestRequest(
         Request.build()
-            .withUrl(`/admin/createPage.json/content/${Tenant}/pages`)
+            .withUrl(`/admin/createPage.json/content/${tenant}/pages`)
             .withPOST()
             .withFormData({
               name,
-              templatePath: `/content/${Tenant}/templates/blank`,
-              title: name
+              templatePath: `/content/${tenant}/templates/blank`,
+              title
             })
             .as('create page')
     )
   }
 
-  async addComponentToPage(page, component, drop, variation) {
+  async addComponent(tenant, page, component, drop, variation) {
     const cmpShortName = component.split('/').reverse()[0]
     return I.sendRestRequest(
         Request.build()
             .withUrl(
-                `/admin/insertNodeAt.json/content/${Tenant}/pages/${page}/jcr:content`)
+                `/admin/insertNodeAt.json/content/${tenant}/pages/${page}/jcr:content`)
             .withPOST()
             .withFormData({component, drop, variation})
             .as(`add component "${cmpShortName}" to page "${page}"`)

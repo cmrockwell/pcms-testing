@@ -1,14 +1,16 @@
-const {Tenant} = require('../const')
 const {I} = inject()
 
 class CreatePagePage {
 
   constructor() {
-    this.url = `/content/admin/pages/pages/create.html/path:/content/${Tenant}/pages`
   }
 
-  createPage(title, andEdit = false) {
-    I.amOnPage(this.url)
+  getUrl(tenant) {
+    return `/content/admin/pages/pages/create.html/path:/content/${tenant}/pages`
+  }
+
+  createPage(tenant, title, andEdit = false) {
+    I.amOnPage(this.getUrl(tenant))
     I.click('Next')
     I.fillField('Title', title)
     I.click('Next')

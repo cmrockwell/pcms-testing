@@ -1,4 +1,3 @@
-const {Tenant} = require('../const')
 const askUserModal = require('../components/AskUserModal')
 const editPagePage = require('./EditPagePage')
 const {I} = inject()
@@ -7,7 +6,6 @@ class PagesPage {
 
   constructor() {
     this.askUserModal = askUserModal
-    this.url = `/content/admin/pages/pages.html/path:/content/${Tenant}/pages`
     this.locator = {
       editButton(title) {
         return locate('a')
@@ -22,8 +20,12 @@ class PagesPage {
     }
   }
 
-  navigate() {
-    I.amOnPage(this.url)
+  getUrl(tenant) {
+    return `/content/admin/pages/pages.html/path:/content/${tenant}/pages`
+  }
+
+  navigate(tenant) {
+    I.amOnPage(this.getUrl(tenant))
     I.waitForElement('.explorer', 10)
   }
 
@@ -34,7 +36,6 @@ class PagesPage {
   }
 
   editPage(title) {
-    this.navigate()
     I.click(this.locator.editButton(title))
     editPagePage.loaded()
   }
