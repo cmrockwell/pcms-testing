@@ -14,3 +14,8 @@ This project uses [CodeceptJS](https://codecept.io/) with [Puppeteer](https://co
 - open a terminal inside the directory
 - run `npm install`
 - run `npm run test`
+
+### Testing Options
+Sets of tests are organized by file. They can be run individually using the commands...
+- npm run test src/tests/rich-toolbar.js
+- npm run test src/tests/server-side.js

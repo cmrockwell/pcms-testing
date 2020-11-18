@@ -29,14 +29,25 @@ class PerApi {
     )
   }
 
-  async createPage(tenant, name, title = name) {
+  async deletePage(path) {    
+    console.log(path)
+    pause()
+    return I.sendRestRequest(
+        Request.build()
+            .withUrl(`/admin/deletePage.json${path}`)
+            .withPOST()
+            .as(`delete page "${path}"`)
+    )
+  }
+
+  async createPage(tenant, name, title = name, templatePathValue = `/content/${tenant}/templates/blank`) {    
     return I.sendRestRequest(
         Request.build()
             .withUrl(`/admin/createPage.json/content/${tenant}/pages`)
             .withPOST()
             .withFormData({
               name,
-              templatePath: `/content/${tenant}/templates/blank`,
+              templatePath: `${templatePathValue}`,
               title
             })
             .as('create page')

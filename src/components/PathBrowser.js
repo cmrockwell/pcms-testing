@@ -57,8 +57,8 @@ class PathBrowser {
 
   setImageDimensions(width, height) {
     I.click(this.locator.linkTab())
-    I.fillField('Image Width (px)', width)
-    I.fillField('Image Height (px)', height)
+    I.fillField('#imgWidth', width)
+    I.fillField('#imgHeight', height)
   }
 }
 
